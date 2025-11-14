@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   topicLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href');
-      if (targetId && targetId !== '#') {
+      if (targetId && targetId.startsWith('#')) {
         e.preventDefault();
 
         if (document.querySelector(targetId)?.classList.contains('is-active')) {
@@ -41,10 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const initialTarget = window.location.hash || '#data-centers';
+  const defaultTopic = window.INITIAL_TOPIC || '#data-centers';
+
+  const initialTarget = window.location.hash || defaultTopic;
   if (!showContent(initialTarget)) {
     showContent('#data-centers');
   }
+
   
   document.body.classList.add('loaded');
 });
