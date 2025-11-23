@@ -421,3 +421,27 @@ body {
     display: block;
   }
 }
+
+
+/* parte da lista de membros */
+
+.team-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.team-list li {
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+  font-weight: 600;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.team-list li:hover {
+  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.25);
+}
