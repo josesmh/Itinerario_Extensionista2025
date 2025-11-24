@@ -5,9 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const carouselsWrapper = document.querySelector('.carousels-wrapper');
   const hamburgerMenu = document.querySelector('.hamburger-menu');
   const mobileNavContainer = document.querySelector('.mobile-nav-container');
+  const mainPanel = document.querySelector('.panel--main');
 
   if (hamburgerMenu && mobileNavContainer) {
     hamburgerMenu.addEventListener('click', () => {
+      hamburgerMenu.classList.toggle('is-open');
       mobileNavContainer.classList.toggle('is-open');
     });
   }
@@ -19,17 +21,17 @@ document.addEventListener('DOMContentLoaded', () => {
     ],
     'e-waste': [
       { title: 'Brasil: 5º maior produtor', description: 'O Brasil figura entre os maiores geradores de lixo eletrônico no mundo.', link: 'https://agenciabrasil.ebc.com.br/geral/noticia/2021-10/brasil-e-o-quinto-maior-produtor-de-lixo-eletronico', image: 'https://images.unsplash.com/photo-1567095751004-aa51a2690368?w=800'},
-      { title: 'Descarte e consumo', description: 'Um estudo sobre o descarte responsável e o comportamento do consumidor.', link: 'https://www.scielo.br/j/read/a/VgwnQhwfKcsg3vFQjZGC48C/', image: 'https://images.unsplash.com/photo-1611281422838-a657db3a1599?w=800'},
+      { title: 'Descarte e consumo', description: 'Um estudo sobre o descarte responsável e o comportamento do consumidor.', link: 'https://www.scielo.br/j/read/a/VgwnQhwfKcsg3vFQjZGC48C/', image: 'https://credcarbo.com/wp-content/uploads/Consumismo-e-Impacto-Ambiental-saiba-qual-a-relacao.webp'},
     ],
     'agriculture': [
       { title: 'Impacto dos drones na agricultura', description: 'Análise sobre a utilização de drones e seus efeitos na agricultura.', link: 'https://ojs.revistacontemporanea.com/ojs/index.php/home/article/view/2306', image: 'https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800' },
-      { title: 'Drones nas lavouras brasileiras', description: 'Como os drones estão ganhando espaço e se tornando uma ferramenta para o agricultor.', link: 'https://www.embrapa.br/busca-de-noticias/-/noticia/101800672/drones-ganham-espaco-nas-lavouras-brasileiras-e-viram-opcao-para-agricultores-e-prestadores-de-servico', image: 'hhttps://www.embrapa.br/image/journal/article?img_id=102601993&t=1755863187599' },
+      { title: 'Drones nas lavouras brasileiras', description: 'Como os drones estão ganhando espaço e se tornando uma ferramenta para o agricultor.', link: 'https://www.embrapa.br/busca-de-noticias/-/noticia/101800672/drones-ganham-espaco-nas-lavouras-brasileiras-e-viram-opcao-para-agricultores-e-prestadores-de-servico', image: 'https://www.embrapa.br/image/journal/article?img_id=102601993&t=1755863187599' },
     ],
     'smart-grids': [
-      { title: 'O papel das Smart Grids', description: 'Como as redes inteligentes transformam a distribuição de eletricidade.', link: 'https://at3w.com/pt-pt/blog/smart-grids-o-que-sao-e-como-estao-a-transformar-a-rede-de-distribuicao-de-eletricidade/', image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800' },
-      { title: 'O Futuro da Distribuição', description: 'Uma visão sobre o futuro da distribuição de energia com as redes inteligentes.', link: 'https://www.unicep.edu.br/post/smart-grids-o-futuro-da-distribui%C3%A7%C3%A3o-de-energia', image: 'https://images.unsplash.com/photo-1620755938883-a903a73c1c87?w=800' },
+      { title: 'O papel das Smart Grids', description: 'Como as redes inteligentes transformam a distribuição de eletricidade.', link: 'https://at3w.com/pt-pt/blog/smart-grids-o-que-sao-e-como-estao-a-transformar-a-rede-de-distribuicao-de-eletricade/', image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800' },
+      { title: 'O Futuro da Distribuição', description: 'Uma visão sobre o futuro da distribuição de energia com as redes inteligentes.', link: 'https://www.unicep.edu.br/post/smart-grids-o-futuro-da-distribui%C3%A7%C3%A3o-de-energia', image: 'https://static.wixstatic.com/media/11062b_b5eac3a0f47d438fa9abcbd70bf8810e~mv2.jpg/v1/fill/w_740,h_416,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_b5eac3a0f47d438fa9abcbd70bf8810e~mv2.jpg' },
     ],
-    'AI-paradox': [
+    'ai-paradox': [
       { title: 'Risco ambiental da IA', description: 'O alto consumo de eletricidade pela IA e seus riscos para o meio ambiente.', link: 'https://news.un.org/pt/story/2025/06/1849246', image: 'https://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/Collections/Embargoed/05-06-2025-Unsplash-data-centre-04.jpg/image1170x530cropped.jpg' },
       { title: 'IA e a agenda climática', description: 'Os desafios da IA para a agenda climática em relação ao consumo de água e energia.', link: 'https://www.ey.com/pt_br/newsroom/2025/11/ia-desafia-agenda-climatica-consumo-energia-agua', image: 'https://www.ey.com/adobe/dynamicmedia/deliver/dm-aid--27cf79a2-f6d1-4bea-bb1c-75aae83420b6/agencia-ey-ia-david.jpg?preferwebp=true&quality=85&width=2000' },
     ],
@@ -39,11 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
     ],
   };
 
-  // Criar o carrossel de artigos
   const createCarousel = (topic, articles) => {
     const carouselDiv = document.createElement('div');
     carouselDiv.className = 'carousel';
-    carouselDiv.innerHTML = `<h3 class="article-category__title">${topic.replace(/-/g, ' ')}</h3>`;
+    const topicLink = document.querySelector(`.topics-menu__link[href="#${topic}"]`);
+    const title = topicLink ? topicLink.innerText : topic.replace(/-/g, ' ');
+    carouselDiv.innerHTML = `<h3 class="article-category__title">${title}</h3>`;
 
     const slidesDiv = document.createElement('div');
     slidesDiv.className = 'carousel-slides';
@@ -82,13 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
         slidesDiv.style.transform = `translateX(-${currentIndex * 100}%)`;
       };
 
-      // Serve para passar o carrosel para o artigo anterior
       prevButton.addEventListener('click', () => {
         currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1;
         updateCarousel();
       });
 
-      // Serve para passar o carrosel para o próximo artigo
       nextButton.addEventListener('click', () => {
         currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
         updateCarousel();
@@ -99,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const buildAllCarousels = () => {
-    carouselsWrapper.innerHTML = ''; 
+    carouselsWrapper.innerHTML = '';
     for (const topic in articlesData) {
       if (articlesData[topic].length > 0) {
         const carousel = createCarousel(topic, articlesData[topic]);
@@ -108,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Mostra o conteúdo do tópico selecionado
   const showContent = (targetId) => {
     contentTopics.forEach(topic => {
       topic.classList.toggle('is-active', `#${topic.id}` === targetId);
@@ -130,9 +130,19 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const targetId = link.getAttribute('href');
+      const isMobile = window.innerWidth <= 768;
+
       if (document.querySelector(targetId)?.classList.contains('is-active')) return;
       showContent(targetId);
       window.history.pushState(null, '', targetId);
+
+      if (isMobile) {
+        if (mobileNavContainer.classList.contains('is-open')) {
+          hamburgerMenu.classList.remove('is-open');
+          mobileNavContainer.classList.remove('is-open');
+        }
+        mainPanel.scrollIntoView({ behavior: 'smooth' });
+      }
     });
   });
 
